@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="llmtree",
-    version="1.0.0",
+    version="1.0.1",
     author="Artem-Darius Weber",
     author_email="mit.3tlasa@gmail@gmail.com",
     description="CLI tool for preparing project data for LLM context",
