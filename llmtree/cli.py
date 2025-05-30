@@ -117,7 +117,7 @@ class ConfigManager:
             include_patterns=["*.py", "*.pyx", "*.pyi", "requirements.txt", 
                             "setup.py", "pyproject.toml", "*.md"],
             exclude_patterns=["__pycache__/*", "*.pyc", "*.pyo", ".venv/*", 
-                            "venv/*", ".pytest_cache/*", "*.egg-info/*"],
+                            "venv/*", ".pytest_cache/*", "*.egg-info/*", ".git/*"],
             include_tree=True,
             max_file_size=50000,
             encoding='utf-8',
@@ -358,6 +358,9 @@ class FileProcessor:
     def should_include_file(self, file_path: Path, base_path: Path) -> bool:
         relative_path = file_path.relative_to(base_path)
         path_str = str(relative_path).replace('\\', '/')
+        
+        if '.git' in relative_path.parts or '__pycache__' in relative_path.parts:
+            return False
         
         if not self.profile.include_hidden and any(
             part.startswith('.') for part in relative_path.parts
